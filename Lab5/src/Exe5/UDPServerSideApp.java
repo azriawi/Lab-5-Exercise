@@ -13,8 +13,7 @@ public class UDPServerSideApp {
 		System.out.println("---------UDP Server Side App | Demonstration of UDP Server-Side Application----------");
         
         try {
-        	
-        
+        	       
     		// Declaration of port no to received datagram packet
     		int portNo = 1234;
     		
@@ -30,32 +29,29 @@ public class UDPServerSideApp {
                 DatagramPacket receivedPacket = new DatagramPacket(receivedBuf, receivedBuf.length);
                 
                 // Received from client
-				datagramSocket.receive(receivedPacket);
+		datagramSocket.receive(receivedPacket);
 				
-				// Retrieve data from packet 
-				String retreiveMessage = new String(receivedPacket.getData());
-				System.out.println("\nMessage received from client: " + retreiveMessage + ".\n");
-				
-				
-				String sendText = Integer.toString(countWords(retreiveMessage));
-				System.out.println("Number of words in sentence is  " + sendText);
+		// Retrieve data from packet 
+		String retreiveMessage = new String(receivedPacket.getData());
+		System.out.println("\nMessage received from client: " + retreiveMessage + ".\n");
 				
 				
-				byte sendBuffer[] = new byte[65535];				
-				sendBuffer = sendText.getBytes();
-				
-				//get the client address
-				InetAddress ca = receivedPacket.getAddress();
-				int ClientPort = receivedPacket.getPort();
-				
-				//create object UDP packet utk send ke client
-				DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, ca, ClientPort);
-				
-				//send balik data to client guna DatagramPacket
-				datagramSocket.send(sendPacket);
+		String sendText = Integer.toString(countWords(retreiveMessage));
+		System.out.println("Number of words in sentence is  " + sendText);
 				
 				
+		byte sendBuffer[] = new byte[65535];				
+		sendBuffer = sendText.getBytes();
 				
+		//get the client address
+		InetAddress ca = receivedPacket.getAddress();
+		int ClientPort = receivedPacket.getPort();
+				
+		//create object UDP packet utk send ke client
+		DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, ca, ClientPort);
+				
+		//send balik data to client guna DatagramPacket
+		datagramSocket.send(sendPacket);
 	            
         	}
 				
